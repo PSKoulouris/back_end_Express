@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <%- include('includes/head') %>
+    <link rel="stylesheet" href="/styles/restaurants.css" />
+    <script defer src="/scripts/restaurants-search.js"></script>
+  </head>
+  <body>
+    <%- include('includes/header') %>
+    <%- include('includes/side-drawer') %>
+    <main>
+      <h1>Recommended restaurants</h1>
+
+      <% if (numberOfRestaurants === 0) { %>
+        <p>No Restaurants Found! You can recommend Some!</p>
+      <% } else {%>
+        <p>
+          We found 
+          <% if(numberOfRestaurants ===1 ){%> 
+            <%= numberOfRestaurants %> restaurant
+          <% }else{ %>
+              <%= numberOfRestaurants %> restaurants
+          <% } %>
+        </p>
+        <p>Find your next favorite restaurants with help of our other users!</p>
+        <div class="search">
+          <input
+            id="restaurant-search"
+            type="search"
+            placeholder="Search restaurants..."
+            aria-label="Search restaurants"
+            class="search-restaurant"
+          />
+        </div>
+        
+        <form action="/restaurants" method="GET">
+          <input type="hidden" value="<%= nextOrder %>" name="order">
+          <button class="btn">Change Order</button>
+        </form>
+        
+        <ul id="restaurants-list">
+          <% for( const restaurant of storedRests) { %>
+              <%- 
+                include('includes/restaurants/restaurant-item',
+                  {
+                    restaurant : restaurant
+                  }
+                ) 
+              %>
+              <%# This is an ejs comment %>
+          <% } %>
+          </ul>
+      <% } %>
+
+      
+    </main>
+  </body>
+</html>

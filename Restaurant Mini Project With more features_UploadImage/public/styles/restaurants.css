@@ -1,0 +1,100 @@
+main {
+    max-width: 40rem;
+}
+
+#restaurants-list {
+    list-style: none;
+    margin: 2rem 0;
+    padding: 0;
+}
+
+.restaurant-item {
+    margin: 1rem 0;
+    padding: 1rem;
+    border-radius: 4px;
+    box-shadow: 0 1px 4px rgba(0, 0, 0, 0.2);
+    background-color: rgb(250, 233, 194);
+    color: rgb(110, 78, 7);
+    text-align: left;
+    display: flex;
+    justify-content: space-between;
+}
+
+.restaurant-item h2 {
+    font-family: 'Roboto Condensed', 'Roboto', sans-serif;
+    font-size: 1.25rem;
+    margin: 0.25rem 0;
+}
+
+.restaurant-item p {
+    margin: 0.2rem 0;
+    color: rgb(110, 78, 7);
+}
+
+.restaurant-meta {
+    margin-bottom: 0.5rem;
+}
+
+.restaurant-meta p {
+    color: rgb(170, 148, 95);
+}
+
+.restaurant-actions {
+    margin-top: 1rem;
+    text-align: right;
+}
+
+.restaurant-actions a,.btn {
+    padding: 0.5rem 0.5rem;
+    background-color: rgb(202, 158, 62);
+    border-radius: 4px;
+    color: white;
+    text-decoration: none;
+    margin: 0 0.4rem;
+    cursor: pointer;
+    border: none;
+    font-size: 14px;
+}
+
+.restaurant-actions a:hover,
+.restaurant-actions a:active,.btn:hover {
+    background-color: rgb(202, 141, 62);
+}
+
+.restaurant-actions #edit-btn {
+    background-color: rgb(2, 61, 150);
+}
+
+.restaurant-actions #delete-btn {
+    background-color: rgb(198, 9, 9);
+}
+
+.restaurant-actions #edit-btn:hover{
+    background-color: rgb(12, 84, 192);
+}
+
+.restaurant-actions #delete-btn:hover {
+    background-color: rgb(243, 4, 4);
+}
+
+.restaurant-image img{
+    width: 13rem;
+    height: 10rem;
+    margin-left: 20px;
+}
+
+.search{
+    position: sticky;
+    top: 0;
+    z-index: 5;
+    background: transparent;
+    padding: 0.5rem 0;
+}
+
+.search-restaurant{
+    width: 100%;
+    padding: 0.6rem 0.8rem;
+    border: 1px solid rgb(110, 78, 7);
+    border-radius: 6px;
+    box-sizing: border-box;
+}

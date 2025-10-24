@@ -1,0 +1,32 @@
+<li class="restaurant-item">
+    <article>
+        <h2>
+            <%= restaurant.name %>
+        </h2>
+        <div class="restaurant-meta">
+            <p>
+                <%= restaurant.cuisine %>
+            </p>
+            <p>
+                <%= restaurant.address %>
+            </p>
+        </div>
+        <p>
+            <%= restaurant.description %>
+        </p>
+        <div class="restaurant-actions">
+            <a data-id="<%= restaurant.rId %>"> <!--Remove the href to avolid conflict with AJAX-->
+                View Restaurant
+            </a>
+
+             <a href="/restaurants/<%= restaurant.rId %>/edit" id="edit-btn">
+                Edit
+            </a>
+            
+            <a id="delete-btn" 
+                data-idDelete="<%= restaurant.rId %>">
+                Delete
+            </a>
+        </div>
+    </article>
+</li>

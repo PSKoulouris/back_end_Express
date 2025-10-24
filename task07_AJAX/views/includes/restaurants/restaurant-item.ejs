@@ -1,0 +1,31 @@
+<li class="restaurant-item" id="<%= restaurant.rId %>">
+    <article>
+        <h2>
+            <%= restaurant.name %>
+        </h2>
+        <div class="restaurant-meta">
+            <p>
+                <%= restaurant.cuisine %>
+            </p>
+            <p>
+                <%= restaurant.address %>
+            </p>
+        </div>
+        <p>
+            <%= restaurant.description %>
+        </p>
+        <div class="restaurant-actions">
+            <a  data-id="<%= restaurant.rId %>">
+                View Restaurant
+            </a>
+
+             <a data-id="<%= restaurant.rId %>" id="edit-btn">
+                Edit
+            </a>
+            
+            <a data-id="<%= restaurant.rId %>"id="delete-btn" >
+                Delete
+            </a>
+        </div>
+    </article>
+</li>

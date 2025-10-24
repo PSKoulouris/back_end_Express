@@ -1,0 +1,31 @@
+<li class="restaurant-item">
+    <article>
+        <h2>
+            <%= restaurant.name %>
+        </h2>
+        <div class="restaurant-meta">
+            <p>
+                <%= restaurant.cuisine %>
+            </p>
+            <p>
+                <%= restaurant.address %>
+            </p>
+        </div>
+        <p>
+            <%= restaurant.description %>
+        </p>
+        <div class="restaurant-actions">
+            <a href="/restaurants/<%= restaurant.rId %>" data-restId="<%= restaurant.rId %>">
+                View Restaurant
+            </a>
+
+             <a href="/restaurants/<%= restaurant.rId %>/edit" id="edit-btn" data-restId="<%= restaurant.rId %>">
+                Edit
+            </a>
+            
+            <a href="/restaurants/<%= restaurant.rId %>/delete" id="delete-btn" onclick="return confirm('Are you sure you want to delete this restaurant?')" data-restId="<%= restaurant.rId %>">
+                Delete
+            </a>
+        </div>
+    </article>
+</li>

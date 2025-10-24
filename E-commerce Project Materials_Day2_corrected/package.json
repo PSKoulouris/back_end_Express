@@ -1,0 +1,23 @@
+{
+  "name": "e-commerce-project-materials",
+  "version": "1.0.0",
+  "description": "",
+  "main": "app.js",
+  "scripts": {
+    "start": "nodemon app.js"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "@dr.pogodin/csurf": "^1.16.6",
+    "bcryptjs": "^3.0.2",
+    "connect-mongodb-session": "^5.0.0",
+    "ejs": "^3.1.10",
+    "express": "^5.1.0",
+    "express-session": "^1.18.2",
+    "mongodb": "^6.20.0"
+  },
+  "devDependencies": {
+    "nodemon": "^3.1.10"
+  }
+}

@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+
+<ul>
+    <% users_data.forEach(function(data){%>
+
+        <li>
+            <p><%= data.name %></p>
+            <p><%= data.email %></p>
+            <p><%= data.address %></p>
+            <p><%= data.comment %></p>
+        </li> 
+
+    <%})%>
+
+</ul>
+    
+</body>
+</html>

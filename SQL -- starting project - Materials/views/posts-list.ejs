@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <%- include('includes/head', { title: 'All Posts' }) %>
+  <link rel="stylesheet" href="/styles/posts.css">
+</head>
+
+<body>
+  <%- include('includes/header') %>
+  <main id="all-posts">
+    <h1>All Posts</h1>
+
+
+    <!--Retrieve all data here from database:-->
+   <% if (!posts || posts.length === 0) { %>
+    <p>There are no posts available to display - write a post first</p>
+    <a href="/new-post">Create a new post</a>
+  <% } else { %>
+    <ol id="post-list">
+      <% for (const post of posts) { %>
+        <li>
+          <%- include("includes/post-item", { post: post }) %>
+        </li>
+      <% } %>
+    </ol>
+  <% } %>
+
+   
+  </main> 
+</body>
+
+</html>
