@@ -23,12 +23,12 @@ async function addTodo(req,res,next){
     let insertedId
 
     try{
-        const result = await todo.save()
+         await todo.save()
         insertedId = result.insertedId
     }catch(error){
         return next(error)
     }
-    
+
    todo.id = insertedId.toString()
    res.json({
     message : 'Todo added successfully',
@@ -37,7 +37,43 @@ async function addTodo(req,res,next){
 
 }
 
+async function updateTodo(req,res,next){
+    const todoId = req.params.id
+    const newTodoText = req.body.text
+
+    const todo = new Todo(newTodoText,todoId)
+
+    try{
+        await todo.save()
+    }catch(error){
+        return next(error)
+    }
+
+    res.json({
+        message : "Todo has been updated!",
+        updatedTodo : todo
+    })
+}
+
+async function deleteTodo(req, res, next){
+    const todoId = req.params.id
+
+    const todo = new Todo(null, todoId)
+
+    try{
+        await todo.delete()
+    }catch(error){
+        return next(error)
+    }
+
+    res.json({
+        message : 'Todo deleted successfully'
+    })
+}
+
 module.exports = {
     getAllTodos:getAllTodos,
-    addTodo: addTodo
+    addTodo: addTodo,
+    updateTodo : updateTodo,
+    deleteTodo : deleteTodo
 }

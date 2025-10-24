@@ -3,6 +3,7 @@ const db = require('./data/database');
 
 const app = express();
 const todosRoutes = require('./routes/todos.routes')
+const corsMidd = require('./middleware/cors')
 
 
 //conect to database:
@@ -16,7 +17,7 @@ app.get('/', (req, res) => {
         res.send('Hello World!')
     })
 */
-
+app.use(corsMidd)
 //middleware JSON from express
 app.use(express.json())
 
