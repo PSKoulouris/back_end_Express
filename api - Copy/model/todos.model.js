@@ -23,7 +23,7 @@ class Todo{
                 const todoId = new mongodb.ObjectId(this.id)
                 return db.getDb()
                 .collection('todos')
-                .One({_id : todoId}, {$set : {text: this.text}})
+                .updateOne({_id : todoId}, {$set : {text: this.text}})
             }else{
                 return db.getDb()
                 .collection('todos')
