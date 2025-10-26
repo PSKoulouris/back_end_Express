@@ -23,7 +23,7 @@ async function addTodo(req,res,next){
     let insertedId
 
     try{
-         await todo.save()
+        const result = await todo.save()
         insertedId = result.insertedId
     }catch(error){
         return next(error)
