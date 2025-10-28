@@ -135,7 +135,7 @@ const deleteItem = (id) => {
     <li v-for = "(task, id) in todos" :key="id" class = "todo-item">
         <input class = "todo-checkbox" type = "checkbox" @change="updateItem(task.id)">
         <span class = "todo-text">{{ task.text }}</span>
-        <button @click = "deleteItem(task.id)" class = "delete-btn">Delete</button>
+        <button @click = "deleteItem(task.id)" class = "btn-delete">Delete</button>
     </li>
   </ul>
 
