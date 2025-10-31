@@ -44,6 +44,7 @@ import {ref} from 'vue';
       }
     }
 
+    //Add in array: 
     const addTask = () => {
       if(newTask.value.trim()) {
         tasks.value.push(newTask.value.trim())
@@ -51,6 +52,14 @@ import {ref} from 'vue';
         console.log(tasks.value)
       }
     }
+
+
+//Delete from the array:
+    const deleteItem = (index) => {
+      tasks.value.splice(index,1)
+      console.log(tasks.value)
+    }
+
 
 </script>
 
@@ -74,13 +83,12 @@ import {ref} from 'vue';
 
   <h3>Todos: </h3>
 
-  <ul>
-    <li>
-      <span>Task 1</span>
-      <button> Delete Task</button>
-    </li>
+  <ul>  
+    <li v-for = "(task, index) in tasks" :key="index">
+            <span>{{ task }}</span>
+            <button @click = "deleteItem(index)"> Delete Task </button>
+      </li>
   </ul>
-
 
 </template>
 
