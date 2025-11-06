@@ -13,11 +13,11 @@ app.get('/', function(req, res){
     res.render('index')
 })
 
+const filePath = path.join(__dirname, 'data', 'users.json')
+
 app.post('/saveData', function (req, res){
     console.log("route saveData triggered")
     const userData = req.body
-
-    const filePath = path.join(__dirname, 'data', 'users.json')
 
     const usersFile = fs.readFileSync(filePath)
     const usersFileArr = JSON.parse(usersFile)
@@ -29,6 +29,24 @@ app.post('/saveData', function (req, res){
 
     res.redirect('/')
 
+})
+
+app.get('/displayData', function(req, res){
+        
+        const userData = fs.readFileSync(filePath)
+        const userDataArr = JSON.parse(userData)
+        
+       /* let result = '<ul>'
+        for(const user of userDataArr){
+            result += '<li>' + user.name + user.email + '</li>'
+        }
+        result += '</ul>'
+/*
+        res.send(result)
+        */
+       //res.render('displayData', {result : result})
+
+       res.render('displayData', {result : userDataArr})
 })
 
 app.listen(3000)
