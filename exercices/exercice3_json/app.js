@@ -9,6 +9,9 @@ app.set('view engine', 'ejs')
 
 app.use(express.urlencoded({extended:true}))
 
+const uuid = require('uuid')
+
+
 app.get('/', function(req, res){
     res.render('index')
 })
@@ -18,6 +21,7 @@ const filePath = path.join(__dirname, 'data', 'users.json')
 app.post('/saveData', function (req, res){
     console.log("route saveData triggered")
     const userData = req.body
+          userData.id = uuid.v4()
 
     const usersFile = fs.readFileSync(filePath)
     const usersFileArr = JSON.parse(usersFile)
@@ -47,6 +51,10 @@ app.get('/displayData', function(req, res){
        //res.render('displayData', {result : result})
 
        res.render('displayData', {result : userDataArr})
+})
+
+app.get('/back', function(req,res){
+    res.redirect('/')
 })
 
 app.listen(3000)
