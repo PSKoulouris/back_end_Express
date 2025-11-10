@@ -57,4 +57,19 @@ app.get('/back', function(req,res){
     res.redirect('/')
 })
 
+app.get('/time', function(req,res){
+
+    const date1 = new Date()
+    const date2 = new Date().toISOString()
+    const date3 = new Date().toISOString().split('T')[0]
+    const date4 = String(new Date().getFullYear()) + '-' + String(new Date().getMonth()) + '-'  + String(new Date().getDate())
+    const date5 = new Date().toLocaleDateString('us')
+    res.send(`<p> ${date1} </p>
+             <p> ${date2} </p>
+             <p> ${date3} </p>
+             <p> ${date4}</p>
+             <p> ${date5} </p>
+             `)
+})
+
 app.listen(3000)
