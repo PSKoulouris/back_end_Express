@@ -7,8 +7,29 @@
 </head>
 <body>
     <h1>Data: </h1>
+
+   <% if(numberOfUsers === 0){
+        %>
+            <p> No Users recorded </p>
+        <% 
+        } else {
+            %>
+                <p>We found
+
+                    <% if(numberOfUsers === 1){
+                        %>
+                            <%= numberOfUsers %> user.
+                        <%
+                    } else { 
+                        %>
+                            <%= numberOfUsers %> users.
+                        <%
+                    } %>
+                </p>
+            <%
+        }%>
     
-    <% result.forEach(function(i){ %>
+    <% for (const i of result) { %>
         <ul>
             <li>
                 Name: <%= i.name %>
@@ -17,7 +38,7 @@
             </li>
         </ul>
     <%
-    })
+    }
     %>
     <a href = "/back">
         <button>Back to form</button>

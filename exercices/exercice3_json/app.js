@@ -50,7 +50,7 @@ app.get('/displayData', function(req, res){
         */
        //res.render('displayData', {result : result})
 
-       res.render('displayData', {result : userDataArr})
+       res.render('displayData', {result : userDataArr, numberOfUsers : userDataArr.length})
 })
 
 app.get('/back', function(req,res){
