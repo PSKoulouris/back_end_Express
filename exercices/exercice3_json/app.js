@@ -11,6 +11,10 @@ app.use(express.urlencoded({extended:true}))
 
 const uuid = require('uuid')
 
+/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
 
 app.get('/', function(req, res){
     res.render('index')
@@ -57,6 +61,45 @@ app.get('/back', function(req,res){
     res.redirect('/')
 })
 
+
+app.get('/displayData/:id', function(req, res){
+
+    const userId = req.params.id
+
+    const userData = fs.readFileSync(filePath)
+    const userDataArr = JSON.parse(userData)
+
+    for(const i of userDataArr){
+        if (userId === i.id){
+            res.render('information', {i})
+        }
+    }
+})
+
+app.get('/back_userData', function(req, res){
+    res.redirect('/displayData')
+})
+
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+app.get('/displayData/:id/edit', function (req,res){
+
+    const userId = req.params.id
+
+    const userData = fs.readFileSync(filePath)
+    const userDataArr = JSON.parse(userData)
+    const specificUserData = userDataArr.find(function(i){
+        return i.id === userId
+    })
+
+    res.render('data_edit', {specificUserData})
+})
+
+app.get('/cancel_edit', function(req, res){
+    res.redirect('/displayData')
+})
+
+
 app.get('/time', function(req,res){
 
     const date1 = new Date()
@@ -71,5 +114,9 @@ app.get('/time', function(req,res){
              <p> ${date5} </p>
              `)
 })
+
+//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 app.listen(3000)
