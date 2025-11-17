@@ -99,6 +99,30 @@ app.get('/cancel_edit', function(req, res){
     res.redirect('/displayData')
 })
 
+app.post('/displayData/:id/edit', function(req,res){
+    const userId = req.params.id
+    const updatedData = req.body
+
+    const userData = fs.readFileSync(filePath)
+    const userDataArr = JSON.parse(userData)
+
+    const userIndex = userDataArr.findIndex(function(i){
+        return i.id = userId
+    })
+
+    userDataArr[userIndex] = {
+        ...userDataArr[userIndex],
+        name : updatedData.name,
+        email : updatedData.email
+    }
+
+    const userDataUpdated = JSON.stringify(userDataArr)
+    fs.writeFileSync(filePath, userDataUpdated)
+
+    res.redirect('/displayData')
+})
+
+/////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 app.get('/time', function(req,res){
 
