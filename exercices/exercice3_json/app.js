@@ -124,6 +124,25 @@ app.post('/displayData/:id/edit', function(req,res){
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
+app.get('/displayData/:id/delete', function(req,res){
+    const userId = req.params.id
+    const userData = fs.readFileSync(filePath)
+    const userDataArr = JSON.parse(userData)
+    const userDataFiltered = userDataArr.filter(function(i){
+        return i.id !== userId
+    })
+    console.log(userDataFiltered)
+    const newUserDataFiltered = JSON.stringify(userDataFiltered)
+    
+    if(userDataFiltered.length === userDataArr.length ){
+        return res.status(404).send("User not found")
+    } else {
+        fs.writeFileSync(filePath, newUserDataFiltered)
+        res.redirect('/displayData')
+    }
+})
+/////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
 app.get('/time', function(req,res){
 
     const date1 = new Date()

@@ -35,12 +35,16 @@
                 <article>
                    <h2> Name: <%= i.name %> </h2>
                     
-                   <a href="/displayData/<%= i.id %>"> 
+                   <a href = "/displayData/<%= i.id %>"> 
                         View information 
                     </a>
                     <br>
                     <a href = "/displayData/<%= i.id %>/edit">
                         Edit data
+                    </a>
+                    <br>
+                    <a href = "/displayData/<%= i.id %>/delete">
+                        Delete user information
                     </a>
                 </article>
             </li>
