@@ -10,6 +10,15 @@ app.use(express.urlencoded({extended:true}))
 
 app.use('/', routerApp)
 
+//Middleware for unsupported routes
+
+app.use(function(err,req,res,next){
+    res.status(500).render('error500')
+})
+app.use(function(req,res){
+    res.status(404).render('error404')
+})
+
 
 
 

@@ -59,12 +59,21 @@ router.get('/displayData/:id', function(req, res){
 
     const userData = fs.readFileSync(filePath)
     const userDataArr = JSON.parse(userData)
+    const specificUserData = userDataArr.find(function(i){
+        return i.id === userId
+    })
+    if(!specificUserData){
+        return res.status(404).render('error404')
+    }
 
+/*
     for(const i of userDataArr){
         if (userId === i.id){
             res.render('information', {i})
         }
-    }
+    }*/
+
+    res.render('information', {specificUserData})
 })
 
 router.get('/back_userData', function(req, res){
