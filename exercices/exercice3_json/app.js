@@ -2,6 +2,7 @@ const express = require ("express");
 const app  = express();
 
 const routerApp = require('./routes/routeFile') 
+const routerAppRedirectHome = require('./routes/routeRedirectHome')
 
 
 app.set('view engine', 'ejs')
@@ -9,6 +10,7 @@ app.set('view engine', 'ejs')
 app.use(express.urlencoded({extended:true}))
 
 app.use('/', routerApp)
+app.use('/',routerAppRedirectHome)
 
 //Middleware for unsupported routes
 
