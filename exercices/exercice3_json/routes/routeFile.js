@@ -27,6 +27,9 @@ router.post('/saveData', function (req, res){
 
 })
 
+
+
+
 router.get('/displayData', function(req, res){
         
         const userData = fs.readFileSync(filePath)
@@ -42,12 +45,50 @@ router.get('/displayData', function(req, res){
         */
        //res.render('displayData', {result : result})
 
-       res.render('displayData', {result : userDataArr, numberOfUsers : userDataArr.length})
+       res.render('displayData', {result : userDataArr, numberOfUsers : userDataArr.length, nextOrder : 'asc'})
 })
 
 router.get('/back', function(req,res){
     res.redirect('/')
 })
+
+/////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+//sorting Asc or desc user names:
+
+router.get('/usersOrder', function(req,res){
+    let order = req.query.order
+    let nextOrder = 'desc'
+
+    if( order !== 'asc' && order !== 'desc'){
+        nextOrder = 'asc'
+    }
+    if( order === 'desc'){
+        nextOrder = 'asc'
+    }
+
+    const userData = fs.readFileSync(filePath)
+    const userDataArr = JSON.parse(userData)
+
+    userDataArr.sort(function(userA, userB){
+        if(
+            (order === 'asc' && userA.name.toLowerCase() > userB.name.toLowerCase()) ||
+            (order === 'desc' && userB.name.toLowerCase() > userA.name.toLowerCase())
+        ) {
+            return 1
+        } else if (
+            userA.name.toLowerCase() === userB.name.toLowerCase()
+     ){
+        return 0
+     } else {
+            return -1
+        }
+
+    })
+
+    res.render('displayData', {result : userDataArr, numberOfUsers : userDataArr.length, nextOrder : nextOrder})
+
+})
+//////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 
 router.get('/displayData/:id', function(req, res){

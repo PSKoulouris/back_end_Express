@@ -28,6 +28,11 @@
                 </p>
             <%
         }%>
+
+    <form method = "GET" action = "/usersOrder" >
+        <input type = "hidden" name = "order" value = "<%= nextOrder %>">
+        <input type = "submit" value = "Order alphabetically">
+    </form>
     
     <% for (const i of result) { %>
         <ul>
