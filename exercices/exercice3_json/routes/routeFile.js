@@ -70,16 +70,13 @@ router.get('/usersOrder', function(req,res){
     const userDataArr = JSON.parse(userData)
 
     userDataArr.sort(function(userA, userB){
-        if(
-            (order === 'asc' && userA.name.toLowerCase() > userB.name.toLowerCase()) ||
-            (order === 'desc' && userB.name.toLowerCase() > userA.name.toLowerCase())
-        ) {
+        if( order === 'asc' && userA.name.toLowerCase() > userB.name.toLowerCase()) {
             return 1
-        } else if (
-            userA.name.toLowerCase() === userB.name.toLowerCase()
-     ){
-        return 0
-     } else {
+        } else if (order === 'desc' && userB.name.toLowerCase() > userA.name.toLowerCase()) {
+            return 1
+        } else if (userA.name.toLowerCase() === userB.name.toLowerCase()) {
+            return 0
+        } else {
             return -1
         }
 
