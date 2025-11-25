@@ -70,17 +70,27 @@ router.get('/usersOrder', function(req,res){
     const userDataArr = JSON.parse(userData)
 
     userDataArr.sort(function(userA, userB){
-        if( order === 'asc' && userA.name.toLowerCase() > userB.name.toLowerCase()) {
+        //Ascending order
+        if (order === 'asc'){
+            if( userA.name.toLowerCase() > userB.name.toLowerCase()) {
             return 1
-        } else if (order === 'desc' && userB.name.toLowerCase() > userA.name.toLowerCase()) {
-            return 1
-        } else if (userA.name.toLowerCase() === userB.name.toLowerCase()) {
-            return 0
         } else {
             return -1
         }
+    }
+        //Descending order:
+        if (order === 'desc'){
+            if( userA.name.toLowerCase() > userB.name.toLowerCase()) { 
+            return -1 
+        }else{
+            return 1
+        }
+    }
 
-    })
+        if (userA.name.toLowerCase() === userB.name.toLowerCase()) {
+            return 0
+    }
+})
 
     res.render('displayData', {result : userDataArr, numberOfUsers : userDataArr.length, nextOrder : nextOrder})
 
@@ -177,7 +187,7 @@ router.get('/displayData/:id/delete', function(req,res){
     }
 })
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-
+//exercice for time and sorting functions sort()
 router.get('/time', function(req,res){
 
     const date1 = new Date()
@@ -185,11 +195,38 @@ router.get('/time', function(req,res){
     const date3 = new Date().toISOString().split('T')[0]
     const date4 = String(new Date().getFullYear()) + '-' + String(new Date().getMonth()) + '-'  + String(new Date().getDate())
     const date5 = new Date().toLocaleDateString('us')
+    //Sorting function():
+
+    const arrayA = [1,2,3,4,5,6,7,8,9,10]
+    const arraySortedAsc = [...arrayA].sort(function(a,b){
+        return a - b //return a negative number = Ascending
+    })
+    const arraySortedDesc = [...arrayA].sort(function(a,b){
+        return b - a //return a positive number = Descending 
+    })
+
+    const arrayB = ["alpha", "beta","delta","epsilon"]
+    const arraySortedAscString = [...arrayB].sort(function(a,b){
+        if(a > b){return 1}
+        if(a < b){return -1}
+        if(a === b){return 0}
+    })
+    const arraySortedDscString = [...arrayB].sort(function(a,b){
+        if(a > b){return -1}
+        if(a < b){return 1}
+        if(a === b){return 0}
+    })
+    
+    
     res.send(`<p> ${date1} </p>
              <p> ${date2} </p>
              <p> ${date3} </p>
              <p> ${date4}</p>
              <p> ${date5} </p>
+             <h2>Sorting Asc: ${arraySortedAsc}</h2>
+             <h2>Sorting Dsc: ${arraySortedDesc}</h2>
+             <h2>Sorting Asc String: ${arraySortedAscString}
+             <h2>Sorting Dsc String: ${arraySortedDscString}
              `)
 })
 
