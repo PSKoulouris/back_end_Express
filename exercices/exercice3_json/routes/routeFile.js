@@ -155,7 +155,7 @@ router.get('/displayData/:id', function(req, res){
             res.render('information', {i})
         }
     }*/
-
+    console.log("data into object:", specificUserData)
     res.render('information', {specificUserData})
 })
 
