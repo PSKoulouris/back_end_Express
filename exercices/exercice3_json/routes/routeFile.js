@@ -4,6 +4,38 @@ const router = express.Router()
 const path = require ('path')
 const fs = require('fs')
 const uuid = require('uuid')
+
+const multer  = require('multer')
+//const upload = multer({ dest: 'uploads/' })
+//to enable own configuration and changes in data, use own storage configuration:
+const storageConfig = multer.diskStorage({
+    destination: function(req,file,cb){ //cb(error, value) where cb is a callback function with error to return(null) and value is the folder path or folder name to save
+        cb(null,"images")},
+    filename: function(req,file,cb){
+        cb(null,Date.now() +"-" + file.originalname)
+    }
+  }
+)
+const upload = multer({
+  storage: storageConfig
+})
+
+//form enctype="multipart/form-data" returns a mutipart form data object as follow:
+/*
+req.body = {
+  name: "Pizza Palace"
+}
+
+req.file = {
+  fieldname: 'image',
+  originalname: 'pizza.jpg',   // comes from filename in the multipart part
+  encoding: '7bit',
+  mimetype: 'image/jpeg',
+  destination: 'uploads/',
+  filename: '1695008392345-pizza.jpg',  // renamed by diskStorage
+  path: 'uploads/1695008392345-pizza.jpg',
+  size: 204932
+}*/
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////
