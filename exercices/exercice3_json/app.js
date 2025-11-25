@@ -8,6 +8,8 @@ const routerAppRedirectHome = require('./routes/routeRedirectHome')
 app.set('view engine', 'ejs')
 //app.set('views', __dirname)
 app.use(express.urlencoded({extended:true}))
+//Serve images from image folder to view:
+app.use('/images', express.static('images'))
 
 app.use('/', routerApp)
 app.use('/',routerAppRedirectHome)

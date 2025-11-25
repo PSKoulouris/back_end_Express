@@ -42,10 +42,16 @@ req.file = {
 
 const filePath = path.join(__dirname,'..', 'data', 'users.json')
 
-router.post('/saveData', function (req, res){
+router.post('/saveData', upload.single("image"), function (req, res){
     console.log("route saveData triggered")
+
     const userData = req.body
           userData.id = uuid.v4()
+    //retrieve and save the saved image path into the userData under the key:imageURL
+    const imageData = req.file
+    const imagePath = imageData.path.replace(/\\/g, "/")
+
+    userData.imageURL = imagePath
 
     const usersFile = fs.readFileSync(filePath)
     const usersFileArr = JSON.parse(usersFile)
