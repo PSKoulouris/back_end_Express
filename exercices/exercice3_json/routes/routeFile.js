@@ -206,7 +206,7 @@ router.post('/displayData/:id/edit', upload.single("image"), function(req,res){
     let imagePath
 
     if (dataImage) {
-         imagePath = dataImage.path.replace(/\\/, '/')
+         imagePath = "/" + dataImage.path.replace(/\\/, '/')
     } else {
          imagePath = userDataArr[userIndex].imageURL
     }
