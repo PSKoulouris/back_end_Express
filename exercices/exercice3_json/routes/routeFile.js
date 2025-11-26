@@ -203,12 +203,20 @@ router.post('/displayData/:id/edit', upload.single("image"), function(req,res){
 
     // condition: use new path if nea image updated or keep old path if no new image updated
     const dataImage = req.file
-    let imagePath
+    
+    let oldImagePath = userDataArr[userIndex].imageURL
+    let newImagePath
 
     if (dataImage) {
-         imagePath = "/" + dataImage.path.replace(/\\/, '/')
+         newImagePath = "/" + dataImage.path.replace(/\\/, '/')
+
+        if(newImagePath !== "/images/defaultImage.jpg" || newImagePath !== oldImagePath){
+            oldFilePath = path.join(__dirname,"..",oldImagePath)
+            fs.unlinkSync(oldFilePath)
+        }
+
     } else {
-         imagePath = userDataArr[userIndex].imageURL
+         newImagePath = userDataArr[userIndex].imageURL
     }
 
     //Update the information for specified index: 
@@ -216,7 +224,7 @@ router.post('/displayData/:id/edit', upload.single("image"), function(req,res){
         ...userDataArr[userIndex],
         name : updatedData.name,
         email : updatedData.email,
-        imageURL : imagePath
+        imageURL : newImagePath
     }
 
     const userDataUpdated = JSON.stringify(userDataArr)
