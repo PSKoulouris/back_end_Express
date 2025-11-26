@@ -48,8 +48,15 @@ router.post('/saveData', upload.single("image"), function (req, res){
     const userData = req.body
           userData.id = uuid.v4()
     //retrieve and save the saved image path into the userData under the key:imageURL
+    //If no image upload, return path of a default image:
+    let imagePath
     const imageData = req.file
-    const imagePath = imageData.path.replace(/\\/g, "/")
+
+    if(imageData){
+        imagePath = "/" + imageData.path.replace(/\\/g, "/")
+    }else{
+        imagePath = "/images/defaultImage.jpg" 
+    }
 
     userData.imageURL = imagePath
 
@@ -203,7 +210,7 @@ router.post('/displayData/:id/edit', upload.single("image"), function(req,res){
     } else {
          imagePath = userDataArr[userIndex].imageURL
     }
-    
+
     //Update the information for specified index: 
     userDataArr[userIndex] = {
         ...userDataArr[userIndex],
