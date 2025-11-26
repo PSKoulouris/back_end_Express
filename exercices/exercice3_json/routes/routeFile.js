@@ -209,7 +209,7 @@ router.post('/displayData/:id/edit', upload.single("image"), function(req,res){
 
     if (dataImage) {
          newImagePath = "/" + dataImage.path.replace(/\\/, '/')
-
+        //If new imagePath then delete the old image in folder after updating
         if(newImagePath !== "/images/defaultImage.jpg" || newImagePath !== oldImagePath){
             oldFilePath = path.join(__dirname,"..",oldImagePath)
             fs.unlinkSync(oldFilePath)
