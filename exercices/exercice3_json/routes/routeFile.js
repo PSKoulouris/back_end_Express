@@ -164,7 +164,7 @@ router.get('/back_userData', function(req, res){
 })
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-
+//Edit: get data to edit , edit data , and then post edited data
 router.get('/displayData/:id/edit', function (req,res){
 
     const userId = req.params.id
@@ -182,7 +182,7 @@ router.get('/cancel_edit', function(req, res){
     res.redirect('/displayData')
 })
 
-router.post('/displayData/:id/edit', function(req,res){
+router.post('/displayData/:id/edit', upload.single("image"), function(req,res){
     const userId = req.params.id
     const updatedData = req.body
 
@@ -193,10 +193,23 @@ router.post('/displayData/:id/edit', function(req,res){
         return i.id === userId
     })
 
+
+    // condition: use new path if nea image updated or keep old path if no new image updated
+    const dataImage = req.file
+    let imagePath
+
+    if (dataImage) {
+         imagePath = dataImage.path.replace(/\\/, '/')
+    } else {
+         imagePath = userDataArr[userIndex].imageURL
+    }
+    
+    //Update the information for specified index: 
     userDataArr[userIndex] = {
         ...userDataArr[userIndex],
         name : updatedData.name,
-        email : updatedData.email
+        email : updatedData.email,
+        imageURL : imagePath
     }
 
     const userDataUpdated = JSON.stringify(userDataArr)
