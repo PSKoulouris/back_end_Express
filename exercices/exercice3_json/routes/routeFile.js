@@ -234,7 +234,7 @@ router.post('/displayData/:id/edit', upload.single("image"), function(req,res){
 })
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-
+//Delete data with image in image folder: 
 router.get('/displayData/:id/delete', function(req,res){
     const userId = req.params.id
     const userData = fs.readFileSync(filePath)
@@ -249,6 +249,15 @@ router.get('/displayData/:id/delete', function(req,res){
         return res.status(404).send("User not found")
     } else {
         fs.writeFileSync(filePath, newUserDataFiltered)
+
+        //Delet image from folder image: 
+        const indexImage = userDataArr.findIndex(function(i){
+            return i.id === userId
+        })
+        let oldImagePath = userDataArr[indexImage].imageURL
+              oldFileImagePath = path.join(__dirname,"..",oldImagePath)
+             fs.unlinkSync(oldFileImagePath)
+
         res.redirect('/displayData')
     }
 })
