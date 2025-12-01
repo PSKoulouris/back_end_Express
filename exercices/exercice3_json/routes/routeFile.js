@@ -250,7 +250,7 @@ router.get('/displayData/:id/delete', function(req,res){
     } else {
         fs.writeFileSync(filePath, newUserDataFiltered)
 
-        //Delet image from folder image: 
+        //Delete image from folder image if i amge is not default NoImage : 
         const indexImage = userDataArr.findIndex(function(i){
             return i.id === userId
         })
@@ -260,7 +260,7 @@ router.get('/displayData/:id/delete', function(req,res){
             if(oldImagePath !== "/images/defaultImage.jpg"){
                 fs.unlinkSync(oldFileImagePath)
             } 
-            
+
         res.redirect('/displayData')
     }
 })
