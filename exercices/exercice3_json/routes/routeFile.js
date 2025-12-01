@@ -256,8 +256,11 @@ router.get('/displayData/:id/delete', function(req,res){
         })
         let oldImagePath = userDataArr[indexImage].imageURL
               oldFileImagePath = path.join(__dirname,"..",oldImagePath)
-             fs.unlinkSync(oldFileImagePath)
-
+             
+            if(oldImagePath !== "/images/defaultImage.jpg"){
+                fs.unlinkSync(oldFileImagePath)
+            } 
+            
         res.redirect('/displayData')
     }
 })
